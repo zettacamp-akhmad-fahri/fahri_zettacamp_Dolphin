@@ -15,12 +15,14 @@ function hasUniqueCharacters(str) {
     // loop through str
     for (let character of str) {
         // add all unique characters to uniqueCharactes string
-        if (!uniqueCharacters.includes(character)) {
-            uniqueCharacters += character
+        if (uniqueCharacters.includes(character)) {
+            return false
         }
+
+        uniqueCharacters += character
     }
     // return true if all characters are unique, return false otherwise
-    return str == uniqueCharacters
+    return true
 
 }
 

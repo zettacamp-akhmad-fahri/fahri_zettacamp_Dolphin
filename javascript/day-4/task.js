@@ -18,7 +18,7 @@ books = [
         releaseYear: 2010,
         isManga: false,
         price: 100000,
-        stock: 20,
+        stock: 0,
         amountPurchased: 0
     },
     
@@ -49,12 +49,12 @@ books = [
 shoppingCart = [
     {
         id: 2,
-        quantity: 21
+        quantity: 15
     },
 
     {
         id: 3,
-        quantity: 20
+        quantity: 22
     }
 ]
 
