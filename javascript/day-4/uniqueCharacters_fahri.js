@@ -10,19 +10,26 @@ console.log(hasUniqueCharacters("hello")); // Output: false
 */
 
 function hasUniqueCharacters(str) {
-    let uniqueCharacters = ""
+    let uniqueCharacters = "" // the string that stores the unique characters
 
+    // loop through str
     for (let character of str) {
+        // add all unique characters to uniqueCharactes string
         if (!uniqueCharacters.includes(character)) {
             uniqueCharacters += character
         }
     }
+    // return true if all characters are unique, return false otherwise
     return str == uniqueCharacters
 
 }
 
 // function hasUniqueCharacters(str) {
+//     // create a set from the string
 //     uniqueSet = new Set(str)
+
+//     // compare the size of the set and the original string
+//     // return true if the sizes are the same, return false otherwise
 //     return str.length == uniqueSet.size
 
 // }
