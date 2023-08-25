@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tables</title>
+
+    <style>
+        table, th, td {
+            border: solid black 1px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 30%;
+        }
+
+        td:first-child {
+            text-align: right;
+        }
+
+        #hobby-table tr:first-child {
+            background-color: green;
+            color: white;
+        }
+
+        #movies-table tr:nth-child(2){
+            background-color: red;
+        }
+
+        #songs-table tr:nth-child(3){
+            background-color: blue;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hobby Table</h1>
+    <table id="hobby-table">
+        <tr>
+            <th>No.</th>
+            <th>Name</th>
+            <th>Hobby</th>
+            <th>Type</th>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>Andy</td>
+            <td>Watching Movies</td>
+            <td>Media</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>Bob</td>
+            <td>Playing Football</td>
+            <td>Sports</td>
+        </tr>
+
+        <tr>
+            <td>3</td>
+            <td>Collin</td>
+            <td>Painting</td>
+            <td>Art</td>
+        </tr>
+    </table>
+    <br><br>
+
+    <h1>Favorite Movies Table</h1>
+    <table id="movies-table">
+        <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Director</th>
+            <th>Year</th>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>A Silent Voice</td>
+            <td>Naoko Yamada</td>
+            <td>2017</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>The Raid</td>
+            <td>Gareth Evans</td>
+            <td>2012</td>
+        </tr>
+            
+        <tr>
+            <td>3</td>
+            <td>Inception</td>
+            <td>Christopher Nolan</td>
+            <td>2010</td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td>Parasite</td>
+            <td>Bong Joon-Ho</td>
+            <td>2019</td>
+        </tr>
+
+        <tr>
+            <td>5</td>
+            <td>The Babadook</td>
+            <td>Jennifer Kent</td>
+            <td>2014</td>
+        </tr>
+    </table>
+
+    <h1>Favorite Songs Table</h1>
+    <table id="songs-table">
+        <tr>
+            <th>No.</th>
+            <th>Title</th>
+            <th>Duration</th>
+            <th>Artist</th>
+            <th>Album</th>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>Stay</td>
+            <td>3:25</td>
+            <td>Post Malone</td>
+            <td>Beerbongs & Bentley</td>
+        </tr>
+        
+        <tr>
+            <td>2</td>
+            <td>Aaj</td>
+            <td>5:01</td>
+            <td>Bloodywood</td>
+            <td>Rakshak</td>
+        </tr>
+
+        <tr>
+            <td>3</td>
+            <td>Backburner</td>
+            <td>3:57</td>
+            <td>Niki</td>
+            <td>Nicole</td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td>Bones &#40;Piano Version&#41;</td>
+            <td>2:48</td>
+            <td>Mod Sun</td>
+            <td>Internet Killed the Rockstar</td>
+        </tr>
+
+    </table>
+    
+</body>
+</html>

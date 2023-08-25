@@ -1,0 +1,83 @@
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+    background-color: black;
+}
+
+.navbar li {
+    display: inline-block;
+    padding: 14px 16px;
+}
+
+.navbar li a{
+    color: white;
+    text-align: center;
+}
+
+.pricing > ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+}
+
+.pricing > ul > li {
+    display: inline-block;
+    padding: 14px 16px;
+    vertical-align: top;
+    width: 10cm;
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}
+
+.profile th {
+    text-align: left;
+}
+
+.regbutton {
+    border: 1px solid green;
+    width: 75px;
+    text-align: center;
+    background-color: black;
+    border-radius: 10%;
+}
+
+.regbutton a {
+    color: white;
+}
+
+
+.songlist table {
+    border: 1px solid black;
+}
+
+.songlist th {
+    border: 1px solid black;
+}
+
+.songlist td {
+    border: 1px solid black;
+}
+
+.about > ul {
+    list-style-type: none;
+    margin: 0;
+    padding:0;
+
+    position: relative;
+    left: 200px;
+}
+
+.about > ul > li {
+    display: inline-block;
+    padding: 14px 16px;
+    vertical-align: top;
+    width: 15cm;
+    margin: 20px;
+    text-align: justify;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: black;
+}

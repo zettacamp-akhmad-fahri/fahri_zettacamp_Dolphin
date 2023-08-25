@@ -1,0 +1,14 @@
+table, th, td {
+    border: 1px solid black;
+    text-align: center;
+  }
+
+th, td {
+  padding-right: 2px;
+  padding-left: 2px;
+}
+
+.name_column{
+  text-align: left;
+  padding-right: 20px;
+}

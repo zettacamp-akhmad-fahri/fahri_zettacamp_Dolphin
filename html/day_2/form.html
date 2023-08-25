@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Onboarding Form</title>
+    <link rel="stylesheet" href="css/style_form.css">
+</head>
+<body>
+    <h1>Employee Onboarding Form</h1>
+
+    <form>
+        <!--Name-->
+        <label for="fname">First Name</label>
+        <input type="text" name="fname" id="fname">
+        <br><br>
+        <label for="lname">Last Name</label>
+        <input type="text" name="lname" id="lname">
+        <br><br>
+
+        <!--Gender-->
+        <label for="gender">Gender</label><br>
+        <input type="radio" name="gender" id="male">
+        <label for="male">Male</label><br>
+        <input type="radio" name="gender" id="female">
+        <label for="female">Female</label><br>
+        <br><br>
+
+        <!--Age-->
+        <label for="age">Age &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="number" name="age" id="age">
+        <br><br>
+
+        <!--Role-->
+        <label for="Role">Role &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <select name="role" id="role">
+            <option value="be">Back End Engineer</option>
+            <option value="fe">Front End Engineer</option>
+            <option value="qa">Quality Assurance</option>
+            <option value="ba">Business Analyst</option>
+            <option value="pm">Project Manager</option>
+        </select>
+        <br><br>
+
+        <!--Email-->
+        <label for="email">Email &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="email" name="email" id="email" placeholder="email@example.com">
+        <br><br>
+
+        <!--Phone-->
+        <label for="phone">Phone &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="tel" name="phone" id="phone">
+        <br><br>
+
+        <!--Website-->
+        <label for="website">Website &nbsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="url" name="website" id="website">
+        <br><br>
+
+        <!--Description-->
+        <label for="description">Self Description</label><br>
+        <textarea name="description" id="description" cols="40" rows="7"></textarea>
+        <br><br>
+
+        <!--Date Joined-->
+        <label for="joindate">Date Joined</label>
+        <input type="date" name="joindate" id="joindate">
+        <br><br>
+
+        <!--Upload Photo-->
+        <label for="photo">Upload Photo</label><br>
+        <input type="file" name="photo" id="photo">
+        <br><br>
+
+        <input type="submit" onclick="alert('Your form is submitted')">
+
+    </form>
+    
+</body>
+</html>

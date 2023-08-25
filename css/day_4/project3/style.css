@@ -1,0 +1,45 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.main-container {
+    text-align: center;
+    width: 800px;
+    margin: 0 auto;
+
+    border: solid white 1px;
+}
+
+.main-container > ul{
+    list-style-type: none;
+}
+
+.main-container > ul > li{
+    display: inline-block;
+    width: 40%;
+    vertical-align: middle;
+    margin: 15px;
+}
+
+.first-row > li:last-child {
+    text-align: justify;
+}
+
+img {
+    border-radius: 10%;
+}
+
+.main-container span:first-child {
+    color: rgb(22, 198, 201);
+    font-size: large;
+}
+
+.main-container span:last-child {
+    color: rgb(9, 99, 100);
+    font-size: small;
+}

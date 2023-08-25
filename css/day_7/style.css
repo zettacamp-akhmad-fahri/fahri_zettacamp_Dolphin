@@ -1,0 +1,220 @@
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+}
+
+header {
+    display: flex;
+    width: 100%;
+    background-color: rgb(26, 24, 24);
+}
+
+header div:nth-child(1),
+header div:nth-child(3) {
+    width: 10%;
+    text-align: center;
+}
+
+header div:nth-child(2) {
+    width: 80%;
+}
+
+.hero {
+    background-image:url(images/hpb-desktop-pro-x-2-lightspeed-gaming-headset.webp);
+
+    height: 50%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.hero-text {
+    color: white;
+    position: absolute;
+    top: 30%;
+    left: 10%;
+}
+
+.home-bottom {
+    display: flex;
+    width: 100%;
+}
+
+.home-products {
+    display: flex;
+    justify-content: space-evenly;
+    width: 70%;
+}
+
+.home-card {
+    width: 20%;
+
+    text-align: center;
+    box-shadow: 2px 4px black;
+    background-color: lightgray;
+
+    border: solid black 1px;
+}
+
+.home-card img {
+    width: 70%;
+}
+
+.home-card:active, 
+.home-card:hover {
+    box-shadow: 3px 6px navy;
+}
+
+.home-price {
+    margin: 30px 0;
+    background-color: black;
+    color: white;
+}
+
+.home-card p {
+    font-size: 12px;
+}
+
+footer {
+    background-color: rgb(26, 24, 24);
+}
+
+footer ul {
+    list-style-type: none;
+    text-align: center;
+}
+
+footer li {
+    display: inline-block;
+    margin: 0 50px;
+}
+
+header a,
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
+    justify-content: space-evenly;
+
+
+    margin: 0 auto;
+}
+
+.card {
+    width: 25%  ;
+    margin: 2rem 1%;
+
+    text-align: center;
+    box-shadow: 2px 4px black;
+
+
+    background-color: lightgray;
+}
+
+.card:active, 
+.card:hover {
+    box-shadow: 3px 6px navy;
+}
+
+.button {
+    width: 20%;
+    margin: 10px auto;
+
+    background-color: blue;
+    color: white;
+
+    border: solid black 1px;
+}
+
+.button:hover {
+    background-color: white;
+    color: blue;
+}
+
+.card img {
+    width: 70%;
+}
+
+.price {
+    font-size: large;
+    background-color: black;
+    color: white;
+}
+
+.to-add {
+    width: 88%;
+    margin: 0 auto;
+    text-align: right;
+}
+
+
+.to-add a {
+    text-decoration: none;
+    color: white;
+
+    padding: 10px;
+    background-color: rgb(73, 73, 212);
+}
+
+
+.about p {
+    width: 80%;
+    margin: 2rem auto;
+    text-align: justify;
+}
+
+.contact {
+    text-align: center;
+}
+
+.contact table {
+    margin: 1rem auto;
+    text-align: left;
+}
+
+.add-item {
+    display: flex;
+    width: 90vw;
+    justify-content: center;
+
+    margin: 0 auto;
+
+    border: solid black 1px
+}
+
+.add-item div{
+    margin: 3rem 10rem;
+}
+
+.item-preview {
+    text-align: center;
+    box-shadow: 2px 4px black;
+    width: 20%;
+
+
+    background-color: lightgray;
+}
+
+.item-preview img {
+    width: 70%;
+}
+
+.item-preview:active, 
+.item-preview:hover {
+    box-shadow: 3px 6px navy;
+}
+
+.item-preview .button {
+    width: 30%;
+}
+

@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+    color: navy;
+    font-family: sans-serif;
+}
+
+header {
+    text-align: center;
+}
+
+.main-container {
+    text-align: center;
+    width: 1200px;
+    margin: 0 auto;
+
+    background-color: black;
+}
+
+.main-container > ul{
+    list-style-type: none;
+    padding: 20px;
+}
+
+.main-container > ul > li{
+    display: inline-block;
+    width: 20%;
+    vertical-align: middle;
+    height: 400px;
+
+    padding: 5px 10px;
+    margin: 10px 15px;
+    border: solid blue 1px;
+
+    background-color: white;
+}
+
+.main-container p {
+    background-color: black;
+    color: white;
+}
+
+p b {
+    color: inherit;
+}

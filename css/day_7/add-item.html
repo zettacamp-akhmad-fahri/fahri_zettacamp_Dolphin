@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="images/logo.png">
+</head>
+<body>
+    <header>
+        <div>
+            <p><a href="index.html" style=" font-size: large;">A-Tech</a></p>
+        </div>
+        <div>
+        </div>
+        <div>
+        <p><a href="shopping-list.html">Shopping List</a></p>
+        </div>
+    </header>
+
+    <h1 style="text-align: center;">Add Item</h1>
+
+    <div class="add-item">
+        <div class="item-form">
+            <form>
+                <table>
+                    <tr>
+                        <td><label for="item-name">Item Name</label></td>
+                        <td><input type="text" name="item-name" id="item-name"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="item-price">Price</label></td>
+                        <td><input type="number" name="item-price" id="item-price"></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="item-description">Item Description</label></td>
+                        <td><textarea name="item-description" id="item-description" cols="50" rows="10"></textarea></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="item-picture">Item Picture</label></td>
+                        <td><input type="file" name="item-picture" id="item-picture"></td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2" style="text-align: center;"><input type="submit" value="Preview"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="item-preview">
+            <h2 style="text-align: center;">Item Preview</h2>
+            <img src="images/g431-gallery-1.webp" alt="g431">
+            <h2>G431</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <p class="price">Rp 909.000,00</p>
+            <a href="shopping-list.html"><p class="button">Confirm</p></a>
+        </div>
+
+    </div>
+
+    <footer>
+        <ul>
+            <li><a href="about-me.html" style="font-size: large;">About</a></li>
+            <li><a href="contact-me.html" style="font-size: large;">Contact Us</a></li>
+        </ul>
+    </footer>
+    
+</body>
+</html>

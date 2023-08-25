@@ -1,0 +1,61 @@
+* {
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 90vw;
+    justify-content: space-evenly;
+
+    border: solid black 1px;
+
+    margin: 0 auto;
+}
+
+.card {
+    width: 30%;
+    margin: 2rem 1%;
+
+    text-align: center;
+    box-shadow: 2px 4px black;
+
+
+    background-color: lightgray;
+}
+
+.card:active, 
+.card:hover {
+    box-shadow: 3px 6px navy;
+}
+
+.button {
+    width: 20%;
+    margin: 10px auto;
+
+    background-color: blue;
+    color: white;
+
+    border: solid black 1px;
+}
+
+.button:hover {
+    background-color: white;
+    color: blue;
+}
+
+.card img {
+    width: 70%;
+}
+
+.price {
+    font-size: large;
+    background-color: black;
+    color: white;
+}
