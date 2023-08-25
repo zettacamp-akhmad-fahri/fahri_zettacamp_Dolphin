@@ -1,4 +1,4 @@
-// the variables
+// books array contains all book information as objects
 books = [
     {
         id: 1,
@@ -18,7 +18,7 @@ books = [
         releaseYear: 2010,
         isManga: false,
         price: 100000,
-        stock: 0,
+        stock: 20,
         amountPurchased: 0
     },
     
@@ -45,6 +45,7 @@ books = [
     }
 ]
 
+// shoppingCart contains the purchase detail
 shoppingCart = [
     {
         id: 2,
@@ -60,18 +61,26 @@ shoppingCart = [
 let discount = 10
 let tax = 10
 
+// the main function
 function bookPurchase (books, shoppingCart, discount, tax) {
-    let grandTotal = 0
+    let grandTotal = 0 //initialize total price to be paid
+    // loop through shoppingCart elements
     for (let item of shoppingCart) {
+        // loop through books to find matching id
         for (let book of books) {
+            // 
             if (item.id == book.id) {
+                // stop operation if stock is empty
                 if (book.stock == 0) {
                     console.log(`${book.title} is not in stock`)
+                    console.log("-----------------------------------------")
                     break
                 }
 
+                // stop operation if quantity > stock
                 if(item.quantity > book.stock) {
                     console.log(`We only have ${book.stock} of ${book.title}`)
+                    console.log("-----------------------------------------")
                     break
                 }
                 else {
@@ -82,10 +91,12 @@ function bookPurchase (books, shoppingCart, discount, tax) {
 
                     let taxAmount = priceAfterDiscount * tax / 100
                     const finalPrice = priceAfterDiscount + taxAmount
-
+                    
+                    //grandTotal is added for each item
                     grandTotal += finalPrice
 
                     console.log(`Title: ${book.title}`)
+                    console.log(`Current Stock: ${book.stock}`)
                     console.log(`Price: ${book.price}`)
                     console.log(`Quantity: ${item.quantity}`)
                     console.log(`Subtotal: ${subtotal}`)
@@ -105,7 +116,7 @@ function bookPurchase (books, shoppingCart, discount, tax) {
                         console.log("This book is sold out")
                     }
 
-                    console.log("--------------------------")
+                    console.log("-----------------------------------------")
                 }
             }
         }
