@@ -14,7 +14,6 @@ console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])); // Output: true
  * @return {boolean} Returns true if the array contains any duplicate value, false otherwise.
  */
 function containsDuplicate(nums) {
-
     // initialize empty array to store unique numbers
     let uniqueNumbers = []
 
