@@ -30,6 +30,16 @@ function containsDuplicate(nums) {
     return false
   }
 
+// function containsDuplicate(nums) {
+// // create set from nums array
+// uniqueSet = new Set(nums)
+
+// // compare the sizes of nums and uniqueSet
+// // return true if the sizes are different -> duplicate found
+// // return false otherwise
+// return !(nums.length === uniqueSet.size)
+// }
+
 console.log(containsDuplicate([1, 2, 3, 1])); // Output: true
 console.log(containsDuplicate([1, 2, 3, 4])); // Output: false
 console.log(containsDuplicate([1, 1, 1, 3, 3, 4, 3, 2, 4, 2])); // Output: true

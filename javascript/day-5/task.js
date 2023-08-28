@@ -126,6 +126,7 @@ function bookPurchase (books, shoppingCart, discount, tax, creditDuration) {
     console.log(`Grand Total: Rp${grandTotal}`)
     console.log("-----------------------------------------")
 
+    // calling the installment function
     calculateInstallment(grandTotal, creditDuration)
 
 }
@@ -135,6 +136,8 @@ function calculateInstallment (grandTotal, creditDuration) {
     const date = new Date() // get current date
     const monthlyPayment = Math.ceil(grandTotal / creditDuration) // calculate monthly payment, round up
 
+    let outputArray = []
+
     console.log("Payment Due Dates")
 
     // showing due dates and monthly payment
@@ -142,8 +145,10 @@ function calculateInstallment (grandTotal, creditDuration) {
         date.setMonth(date.getMonth() + 1)
         const dateString = date.toLocaleString('default', { day: 'numeric', month: 'long', year: 'numeric' })
 
-        console.log(`${dateString}: Rp${monthlyPayment}`)
+       outputArray.push(`${dateString}: Rp${monthlyPayment}`)
     }
+
+    console.log(outputArray)
 }
 
 
