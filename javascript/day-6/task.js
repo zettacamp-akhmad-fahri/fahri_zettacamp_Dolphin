@@ -61,7 +61,7 @@ shoppingCart = [
 
 const discount = 10
 const tax = 10
-const creditDuration = 6
+const creditDuration = 12
 
 // the main function
 function bookPurchase (books, shoppingCart, discount, tax, creditDuration) {
@@ -134,7 +134,6 @@ function bookPurchase (books, shoppingCart, discount, tax, creditDuration) {
 // installment function
 function calculateInstallment (grandTotal, creditDuration) {
     const date = new Date() // get current date
-    const monthlyPayment = Math.ceil(grandTotal / creditDuration) // calculate monthly payment, round up
 
     // declare empty array for output 
     let outputArray = []
@@ -142,7 +141,14 @@ function calculateInstallment (grandTotal, creditDuration) {
     console.log("Payment Due Dates")
 
     // showing due dates and monthly payment
-    for (let i = 1; i <= creditDuration; i++) {
+    for (let term = 1; term <= creditDuration; term++) {
+        let monthlyPayment = Math.ceil(grandTotal / creditDuration) // calculate monthly payment, round up
+
+        // adjusment on the final term because of rounding up
+        if (term == creditDuration) {
+            monthlyPayment = monthlyPayment - (monthlyPayment * creditDuration - grandTotal)
+        }
+
         date.setMonth(date.getMonth() + 1) // set date to next month
         const dateString = date.toLocaleString('default', { day: 'numeric', month: 'long', year: 'numeric' }) // turn date to string with suitable format
 
@@ -155,6 +161,12 @@ function calculateInstallment (grandTotal, creditDuration) {
     }
 
     console.log(outputArray)
+
+    // calculationg total payment
+    let paymentArray = outputArray.map( (term) => term["Payment Amount"]) // create array of payment amount
+    let sumPayment = paymentArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0) // sum all payment value
+    console.log(`Total Payment: ${sumPayment}`)
+
 }
 
 
