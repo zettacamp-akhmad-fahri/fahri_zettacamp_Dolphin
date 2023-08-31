@@ -1,5 +1,5 @@
 // array of object songs
- songs = [
+const songs = [
     {
         title: "Dana-Dan",
         artist: "Bloodywood",
@@ -232,7 +232,6 @@
     }, 
 ]
 
-
 // function to group songs based on artists
 function groupArtist(songs) {
     // declare output as empty object
@@ -331,8 +330,8 @@ function getTotal (groups) {
 }
 
 
-// execute task 2
-console.log(groupArtist(songs))
+// // execute task 2
+// console.log(groupArtist(songs))
 
 // // execute task 3
 // console.log(groupGenre(songs))
@@ -340,6 +339,6 @@ console.log(groupArtist(songs))
 // // execute task 4
 // createRandomPlaylist(songs)
 
-// // execute additional
+// execute additional
 // console.log(getTotal(groupByGenre))
-// console.log(getTotal(groupByArtist))
+console.log(getTotal(groupByArtist))
