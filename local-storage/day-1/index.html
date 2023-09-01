@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table id="book-table">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Description</th>
+            <th>Total Count</th>
+            <th>Action</th>
+        </tr>
+
+        <tbody id="book-table-body">
+
+        </tbody>
+    </table>
+
+    <script>
+        const booksData = [
+            {
+                title: "One Piece",
+                author: "Eiichiro Oda",
+                description: "Pirate manga",
+                count: 100
+            },
+            {
+                title: "Mockingjay",
+                author: "Suzanne Collins",
+                description: "Survival drama",
+                count: 200
+            },
+            {
+                title: "The Tipping Point",
+                author: "Malcolm Gladwell",
+                description: "Self help book    ",
+                count: 100
+            }
+        ]
+        
+        // set initial data in local storage
+        localStorage.setItem("books", JSON.stringify(booksData))
+        
+        
+        function getData() {
+            let books = JSON.parse(localStorage.getItem("books"))
+
+            buildTable(books)
+        }
+
+        getData()
+
+        function buildTable(data) {
+            const table = document.getElementById("book-table-body")
+
+            for (let i = 0; i < data.length; i++) {
+                let id = Date.now()+i
+                const row = `
+                <tr>
+                    <td>${id}</td>
+                    <td>${data[i].title}</td>
+                    <td>${data[i].author}</td>
+                    <td>${data[i].description}</td>
+                    <td>${data[i].count}</td>
+                    <td><button>Edit</button>
+                        <button>Delete</button>
+                    </td>
+
+                </tr>
+                `
+                table.innerHTML += row
+            }
+        }
+
+        function deleteRow(bookId) {
+
+            let books = JSON.parse(localStorage.getItem("books"))
+            
+        }
+
+        function addData() {
+            let books = JSON.parse(localStorage.getItem("books"))
+
+        }
+
+        function showEditRow() {
+            
+        }
+    </script>
+</body>
+</html>
