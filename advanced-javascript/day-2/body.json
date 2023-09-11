@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "quantity": 10,
+        "discount": 10,
+        "tax": 10
+    },
+
+    {
+        "id": 2,
+        "quantity": 10,
+        "discount": 10,
+        "tax": 10
+    },
+
+    {
+        "addedPrice": 50000,
+        "term": 1
+    }
+]
