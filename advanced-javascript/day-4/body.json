@@ -11,10 +11,5 @@
         "quantity": 10,
         "discount": 10,
         "tax": 10
-    },
-
-    {
-        "addedPrice": 50000,
-        "term": 1
     }
 ]

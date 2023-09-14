@@ -74,9 +74,10 @@ app.post('/add-book', (req, res) => {
     res.send(books.books)
 })
 
-// book purchase using map
 app.post('/book-purchase-map', (req, res) => {
-  
+  const output = books.bookPurchaseMap(books.books, req.body)
+  // console.log(output)
+  res.send(output)
 })
 
 app.listen(port, () => {
