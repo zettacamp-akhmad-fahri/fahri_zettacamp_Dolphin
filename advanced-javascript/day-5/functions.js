@@ -61,21 +61,39 @@ function createRandomPlaylist (songs) {
         }
     }
 
-    console.log(playlist)
-    console.log(`Total Songs: ${playlist.length}`)
-    console.log(`Total Duration: ${totalDuration}`)
+    const output = {
+        playlist: playlist,
+        totalSongs: playlist.length,
+        totalDuration: totalDuration
+    }
+    return output
+    // console.log(playlist)
+    // console.log(`Total Songs: ${playlist.length}`)
+    // console.log(`Total Duration: ${totalDuration}`)
 }
 
 // function to get total duration and total songs
+function getTotal (targetGroup) {
+    const groupByArtist = groupArtist(songs)
+    const groupByGenre = groupGenre(songs)
+    let groups
 
-const groupByArtist = groupArtist(songs)
-const groupByGenre = groupGenre(songs)
+    // choose object based on the category
+    if (targetGroup.category == "genre") {
+        groups = groupByGenre
+    }
+    else if (targetGroup.category == "artist") {
+        groups = groupByArtist
+    }
+    else {
+        return "Invalid input"
+    }
 
-function getTotal (groups) {
     // declare output as an empty array
     let outputArray = []
     // turn groups object into array
     const groupsEntries = Object.entries(groups)
+    // console.log(groupsEntries)
 
     for (let group of groupsEntries) {
         // calculate total duration
@@ -97,18 +115,4 @@ function getTotal (groups) {
     return outputArray
 }
 
-
-// // execute task 2
-// console.log(groupArtist(songs))
-
-// // execute task 3
-// console.log(groupGenre(songs))
-
-// // execute task 4
-// createRandomPlaylist(songs)
-
-// execute additional
-// console.log(getTotal(groupByGenre))
-// console.log(getTotal(groupByArtist))
-
-module.exports(groupArtist, groupGenre, createRandomPlaylist)
+module.exports = {groupArtist, groupGenre, createRandomPlaylist, getTotal}
