@@ -29,14 +29,11 @@ const userSchema = new mongoose.Schema({
             type: String,
             required: true
         },
-        zipCode: {
-            type: Number,
-            required: true
-        },
     },
 
     favoriteBook: {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "Book",
         required: false
     }
 })
