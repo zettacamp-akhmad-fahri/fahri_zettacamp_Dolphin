@@ -27,7 +27,12 @@ const bookshelfSchema = mongoose.Schema({
             type: Number,
             required: true
         }
-    }]
+    }],
+
+    genre: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Bookshelf', bookshelfSchema)

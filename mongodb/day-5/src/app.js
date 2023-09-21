@@ -206,6 +206,46 @@ app.get('/bookDistinct', async (req, res) => {
     }
 })
 
+// aggregates
+app.get('/bookAggregate', async(req, res) => {
+    try {
+        const books = await Book.aggregate(req.body)
+        res.status(200).send(books)
+    }
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
+app.get('/bookshelfAggregate', async(req, res) => {
+    try {
+        const bookshelves = await Bookshelf.aggregate()
+        res.status(200).send(bookshelves)
+    }
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
+app.get('/bookshelfLookup', async(req, res) => {
+    try {
+        const bookshelves = await Bookshelf.aggregate([
+            {
+                $lookup: {
+                    from: "books",
+                    localField: "books",
+                    foreignField: "_id",
+                    as: "books"
+                }
+            }
+        ])
+        res.status(200).send(bookshelves)
+    }
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })
