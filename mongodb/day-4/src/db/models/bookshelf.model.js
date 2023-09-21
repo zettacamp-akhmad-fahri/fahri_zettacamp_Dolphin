@@ -16,6 +16,17 @@ const bookshelfSchema = mongoose.Schema({
         type: mongoose.Types.ObjectId,
         required: true,
         ref: "Book"
+    }],
+
+    discount: [{
+        month: {
+            type: String,
+            required: true
+        },
+        value: {
+            type: Number,
+            required: true
+        }
     }]
 })
 

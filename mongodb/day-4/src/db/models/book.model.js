@@ -29,6 +29,11 @@ const bookSchema = new mongoose.Schema({
     isManga: {
         type: Boolean,
         required: true,
+    },
+
+    genre: {
+        type: String,
+        required: true
     }
 })
 

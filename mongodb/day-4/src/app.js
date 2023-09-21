@@ -187,8 +187,19 @@ app.delete('/bookshelves', async (req, res) => {
 
 app.put('/bookshelves', async (req, res) => {
     try {
-        const updated = await Bookshelf.updateOne(req.body[0], req.body[1])
+        const updated = await Bookshelf.updateMany(req.body[0], req.body[1], req.body[2])
         res.status(200).send(updated)
+    }
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
+// distinct
+app.get('/bookDistinct', async (req, res) => {
+    try {
+        const books = await Book.find(req.body[0]).distinct(req.body[1].distinct)
+        res.status(200).send(books)
     }
     catch(error) {
         res.status(400).send(error)
