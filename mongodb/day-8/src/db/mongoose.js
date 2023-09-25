@@ -1,9 +1,7 @@
 const mongoose = require('mongoose')
-const User = require('./models/user.model')
-const Book = require('./models/book.model')
 
 const url = 'mongodb://localhost:27017/'
-const database = 'day-2'
+const database = 'day-8'
 
 mongoose.connect(`${url}${database}`, {
     useNewUrlParser: true,
