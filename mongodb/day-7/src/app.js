@@ -294,6 +294,74 @@ app.get('/bookshelfLookup', async(req, res) => {
     }
 })
 
+app.get('/pagination', async (req, res) => {
+    try {
+        const pageSize = req.body.documentsPerPage
+        const viewPage = req.body.viewPage
+
+        const aggregateArray = [
+            {
+                $skip:  pageSize * (viewPage - 1)
+            },
+
+            {
+                $limit: pageSize
+            }
+
+        ]
+
+        const books = await Book.aggregate(aggregateArray)
+        res.status(200).send(books)
+    }
+
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
+app.get('/facet', async (req, res) => {
+    aggregateArray = [
+        {
+            $facet: {
+                "group": [
+                    {
+                        $group: {
+                            _id: {genre: "$" + req.body[0].groupBy},
+                            count: {$sum: 1}
+                        }
+                    },
+
+                    {
+                        $sort: {count: -1}
+                    }
+                ],
+
+                "bucket": [
+                    {
+                        $bucket: {
+                            groupBy: "$" + req.body[1].groupBy,
+                            boundaries: req.body.boundaries,
+                            default: "Other",
+                            output: {
+                                "count": {$sum: 1},
+                                "books": {
+                                    $push: {
+                                        "titleAuthor": {$concat: ["$title", " by ", "$author"]},
+                                        "releaseYear": "$" + req.body[1].groupBy
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    ]
+
+    const books = await Book.aggregate(aggregateArray)
+    res.status(200).send(books)
+})
+
 app.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })
