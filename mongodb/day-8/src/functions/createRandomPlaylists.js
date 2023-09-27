@@ -11,13 +11,13 @@ function createRandomPlaylist (songs) {
         let random = Math.floor(Math.random() * songs.length)
 
         // check if the song already on playlist
-        if (!playlist.includes(songs[random])) {
+        if (!playlist.includes(songs[random]["_id"])) {
             // check whether duration goes over one hour if the song is added
             if (totalDuration + songs[random].duration > 3600) {
                 break
             }
-            playlist.push(songs[random]["_id"])            // add song to playlist
-            totalDuration += songs[random].duration // add song duration to total duration
+            playlist.push(songs[random]["_id"])         // add song to playlist
+            totalDuration += songs[random].duration     // add song duration to total duration
         }
     }
 

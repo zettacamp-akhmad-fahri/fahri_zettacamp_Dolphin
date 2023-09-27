@@ -10,6 +10,7 @@ const Song = require('./db/models/song.model')
 const Playlist = require('./db/models/playlist.model')
 const createRandomPlaylist = require('./functions/createRandomPlaylists')
 const updatePlaylistsField = require('./functions/updatePlaylistsField')
+const calculatePlaylist = require('./functions/calculatePlaylist')
 
 // songs
 app.post('/songs', async (req, res) => {
@@ -44,7 +45,8 @@ app.delete('/songs', async (req, res) => {
 
 app.put('/songs', async (req, res) => {
     try {
-        const updated = await Song.updateOne(req.body[0], req.body[1])
+        const updated = await Song.updateMany(req.body[0], req.body[1])
+        calculatePlaylist()
         res.status(200).send(updated)
     }
     catch(error) {
@@ -52,10 +54,56 @@ app.put('/songs', async (req, res) => {
     }
 })
 
-app.put('/updatePlaylistsField', async (req, res) => {
+app.get('/songAggregate', async (req, res) => {
     try {
-        await updatePlaylistsField()
-        res.status(200).send("Update Successful")
+        const docPerPage = req.body.docPerPage
+        const viewPage = req.body.viewPage
+
+        const songAggregate = await Song.aggregate([
+            {
+                $facet: {
+                    "genreSummary": [
+                        {
+                            $group: {
+                                _id: {genre: "$genre"},
+                                totalDuration: {$sum: "$duration"},
+                                averageDuration: {$avg: "$duration"},
+                                count: {$sum: 1}
+                            }
+                        }
+                    ],
+
+                    "showSongs": [
+                        {
+                            $match: {duration: {$gte: 250}}
+                        },
+
+                        {
+                            $lookup: {
+                                from: "playlists",
+                                localField: "playlists",
+                                foreignField: "_id",
+                                as: "playlists"
+                            }
+                        },
+
+                        {
+                            $sort: {duration: - 1}
+                        },
+            
+                        {
+                            $skip: viewPage * (docPerPage - 1)
+                        },
+            
+                        {
+                            $limit: docPerPage
+                        }
+                    ]
+                }
+            }
+        ])
+        res.status(200).send(songAggregate[0][req.body.facet])
+        // res.status(200).send(songAggregate)
     }
     catch(error) {
         res.status(400).send(error)
@@ -63,11 +111,33 @@ app.put('/updatePlaylistsField', async (req, res) => {
 })
 
 // playlist
-app.post('/playlists', async (req, res) => {
+app.post('/createRandomPlaylist', async (req, res) => {
     try {
         const playlist = await createRandomPlaylist.container()
         const insertedPlaylist = await Playlist.insertMany(playlist)
+
+        await updatePlaylistsField()
+
         res.status(201).send(insertedPlaylist)
+    }
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
+app.post('/playlists', async (req, res) => {
+    try {
+        for (ids of req.body.ids) {
+            await Playlist.create({
+                songs: ids,
+                totalSongs: 0,
+                totalDuration: 0
+            })
+            calculatePlaylist()
+        }
+
+        await updatePlaylistsField()
+        res.status(201).send("Successful")
     }
     catch(error) {
         res.status(400).send(error)
@@ -87,6 +157,7 @@ app.get('/playlists', async (req, res) => {
 app.delete('/playlists', async (req, res) => {
     try {
         const deleted = await Playlist.deleteMany(req.body)
+        await updatePlaylistsField()
         res.status(200).send(deleted)
     }
     catch(error) {
@@ -96,8 +167,64 @@ app.delete('/playlists', async (req, res) => {
 
 app.put('/playlists', async (req, res) => {
     try {
-        const updated = await Playlist.updateOne(req.body[0], req.body[1])
+        const updated = await Playlist.updateMany(req.body[0], req.body[1])
+        calculatePlaylist()
         res.status(200).send(updated)
+    }
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
+app.get('/playlistAggregate', async (req, res) => {
+    try {
+        const docPerPage = req.body.docPerPage
+        const viewPage = req.body.viewPage
+
+        const playlistAggregate = await Playlist.aggregate([
+            {
+                $facet: {
+                    "playlistGrouping": [
+                        {
+                            $group: {
+                                _id: {totalSongs: "$totalSongs"},
+                                totalDuration: {$sum: "$totalDuration"},
+                                averageDuration: {$avg: "$totalDuration"},
+                                count: {$sum: 1}
+                            }
+                        }
+                    ],
+
+                    "showPlaylists": [
+                        {
+                            $match: {totalSongs: {$gte: 10}}
+                        },
+            
+                        {
+                            $lookup: {
+                                from: "songs",
+                                localField: "songs",
+                                foreignField: "_id",
+                                as: "songs"
+                            }
+                        },
+            
+                        {
+                            $sort: {totalSongs: -1, totalDuration: -1}
+                        },
+            
+                        {
+                            $skip: viewPage * (docPerPage - 1)
+                        },
+            
+                        {
+                            $limit: docPerPage
+                        }
+                    ]
+                }
+            }
+        ])
+        res.status(200).send(playlistAggregate[0][req.body.facet])
     }
     catch(error) {
         res.status(400).send(error)

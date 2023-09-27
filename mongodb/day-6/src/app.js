@@ -207,16 +207,6 @@ app.get('/bookDistinct', async (req, res) => {
 })
 
 // aggregates
-app.get('/bookAggregate', async(req, res) => {
-    try {
-        const books = await Book.aggregate(req.body)
-        res.status(200).send(books)
-    }
-    catch(error) {
-        res.status(400).send(error)
-    }
-})
-
 app.get('/bookshelfAggregate', async(req, res) => {
     try {
         const bookshelves = await Bookshelf.aggregate()
@@ -227,18 +217,76 @@ app.get('/bookshelfAggregate', async(req, res) => {
     }
 })
 
+app.get('/bookAggregate', async(req, res) => {
+    try {
+        const aggregateArray = []
+        
+        // match
+        if (req.body.match){
+            const matchInnerObject = {}
+            matchInnerObject[req.body.match.field] = req.body.match.condition
+        
+            const matchObject = {
+                $match: matchInnerObject
+            }
+
+            aggregateArray.push(matchObject)
+        }
+
+        // sort
+        if (req.body.sort) {
+            const sortInnerObject = {}
+            sortInnerObject[req.body.sort.field] = req.body.sort.sortOrder
+
+            const sortObject = {
+                $sort: sortInnerObject
+            }
+
+            aggregateArray.push(sortObject)
+        }
+
+        // concat
+
+        if (req.body.concat) {
+            const concatObject = {
+                $concat: req.body.concat.elements
+            }
+    
+            const addFieldInnerObject = {}
+            addFieldInnerObject[req.body.concat.newFieldName] = concatObject
+    
+            const addFieldObject = {
+                $addFields: addFieldInnerObject
+            }
+    
+            aggregateArray.push(addFieldObject)
+        }
+        
+
+        console.log(aggregateArray)
+        const books = await Book.aggregate(aggregateArray)
+        res.status(200).send(books)
+    }
+    catch(error) {
+        res.status(400).send(error)
+    }
+})
+
 app.get('/bookshelfLookup', async(req, res) => {
     try {
-        const bookshelves = await Bookshelf.aggregate([
-            {
+        const lookupArray = []
+
+        for (let element of req.body) {
+            lookupArray.push({
                 $lookup: {
-                    from: req.body.from,
-                    localField: req.body.localField,
-                    foreignField: req.body.foreignField,
-                    as: req.body.as
+                    from: element.reference,
+                    localField: element.localField,
+                    foreignField: element.foreignField,
+                    as: element.as
                 }
-            }
-        ])
+            })
+        }
+        const bookshelves = await Bookshelf.aggregate(lookupArray)
         res.status(200).send(bookshelves)
     }
     catch(error) {
