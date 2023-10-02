@@ -1,5 +1,5 @@
 // books array contains all book information as objects
-books = [
+const books = [
     {
         id: 1,
         title: "One Piece",
@@ -46,7 +46,7 @@ books = [
 ]
 
 // shoppingCart contains the purchase detail
-shoppingCart = [
+const shoppingCart = [
     {
         id: 1,
         quantity: 10
@@ -58,6 +58,7 @@ shoppingCart = [
     }
 ]
 
+console.log(books[0].title)
 
 const discount = 10
 const tax = 10
@@ -119,6 +120,7 @@ function bookPurchase (books, shoppingCart, discount, tax, creditDuration) {
                     }
 
                     console.log("-----------------------------------------")
+                    break
                 }
             }
         }
