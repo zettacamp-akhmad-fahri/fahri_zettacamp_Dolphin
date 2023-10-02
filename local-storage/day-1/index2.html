@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD and Local Storage Task</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+</head>
+<body>
+    <div class="contrainer">
+        <h1>CRUD and Local Storage Task</h1>
+        <br>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book Id</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Description</th>
+                    <th>Total Count</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    bindData()
+    function addDataToLocalStorage(bookObject) {
+        let books = JSON.parse(localStorage.getItem("bookData"))
+
+        if (books != null) {
+            books.push(bookObject)
+
+            localStorage.setItem("bookData", JSON.stringify(books))
+        }
+        else {
+            let bookData = new Array()
+            bookData.push(bookObject)
+            localStorage.setItem("bookData", JSON.stringify(bookData))
+        }
+    }
+
+    function updateDataToLocalStorage(bookObject) {
+        let books = JSON.parse(localStorage.getItem("bookData"))
+
+        if (books != null) {
+            let book = books.filter((x) => x.id == bookObject.id).pop()
+            if (book != null) {
+                book.title = bookObject.title
+                book.author = bookObject.author
+                book.description = bookObject.description
+                book.count = bookObject.count
+            }
+            localStorage.setItem("bookData", JSON.stringify(books))
+        }
+    }
+
+    function deleteDataFromLocalStorage(bookId) {
+        let books = JSON.parse(localStorage.getItem("bookData"))
+
+        if (books != null) {
+            books.splice(books.findIndex(a => a.id === bookId), 1)
+            localStorage.setItem("bookData", JSON.stringify(books))
+        }
+    }
+
+    function bindData() {
+        let books = JSON.parse(localStorage.getItem("bookData"))
+        if (books != null) {
+            document.getElementById("table-body").innerHTML = ""
+            books.forEach(function (item, index) {
+                debugger
+                let buttonEditId = "buttonEdit" + item.id
+                let buttonDeleteId = "buttonDelete" + item.id
+                let tableRow = `
+                <tr id='"${item.id}"' data-id='"${item.id}"' data-title='"${item.title}"' data-author='"${item.author}"' data-description='"${item.description}"' data-count='"${item.count}"'>
+                    <td class="td-data">${item.id}</td>
+                    <td class="td-data">${item.title}</td>
+                    <td class="td-data">${item.author}</td>
+                    <td class="td-data">${item.description}</td>
+                    <td class="td-data">${item.count}</td>
+                    <td class="td-data">
+                        <button id='"${buttonEditId}"' onclick='showEditRow("${item.id}")'>Edit</button>
+                        <button id='"${buttonDeleteId}"' onclick='deleteRow("${item.id}")'>Delete</button>
+                    </td>
+                </tr>
+                `
+                document.getElementById("table-body").innerHTML += tableRow
+            })
+        }
+        let addRow = `
+        <tr>
+            <td class="td-data"></td>
+            <td class="td-data"><input type="text" id="title"></td>
+            <td class="td-data"><input type="text" id="author"></td>
+            <td class="td-data"><input type="text" id="description"></td>
+            <td class="td-data"><input type="text" id="count"></td>
+            <td class="td-data"><button id="buttonAddCustomer" onclick="addBook()">Add</button></td>
+        </tr>
+        `
+        document.getElementById("table-body").innerHTML += addRow
+    }
+
+    function getBookID() {
+        const id = Date.now()
+        return id
+    }
+
+    function addBook() {
+        let bookId = getBookID()
+        let title = document.getElementById("title").value
+        let author = document.getElementById("author").value
+        let description = document.getElementById("description").value
+        let count = document.getElementById("count").value
+
+        const bookObject = {
+            "id": bookId,
+            "title": title,
+            "author": author,
+            "description": description,
+            "count": count
+        }
+        addDataToLocalStorage(bookObject)
+        document.getElementById("title").value = ""
+        document.getElementById("author").value = ""
+        document.getElementById("description").value = ""
+        document.getElementById("count").value = ""
+        bindData()
+    }
+
+    function showEditRow(bookId) {
+        let bookRow = document.getElementById(bookId)
+        let trdata = bookRow.querySelectorAll(".td-data")
+
+        let bookId = trdata[0].innerHTML
+        let title = trdata[1].innerHTML
+        let author = trdata[2].innerHTML
+        let description = trdata[3].innerHTML
+        let count = trdata[4].innerHTML
+
+        trdata[0].innerHTML =  '<input name="bookid"  disabled id="bookid" value="' + bookID + '"/>'
+        trdata[1].innerHTML = '<input name="title" id="title" value="' + title + '"/>';
+        trdata[2].innerHTML = '<input name="author" id="author" value="' + author + '"/>';
+        trdata[3].innerHTML = '<input name="description" id="description" value="' + description + '"/>';
+        trdata[4].innerHTML = '<input name="count" id="count" value="' + count + '"/>';
+
+        trdata[5].innerHTML =
+            "<button onclick='updateBook(" + bookId + ")'>Update</button>"
+            + "<button onclick='cancel(" + bookId + ")'>Cancel</button>"
+            + "<button onclick='deleteBook(" + bookId + ")'>Delete</button>"
+    }
+
+    function cancel(bookId) {
+        debugger
+        let buttonEditId = "buttonEdit" + bookId
+        let buttonDeleteId = "buttonDelete" + bookId
+
+        let bookRow = document.getElementById(bookId)
+        let data = bookRow.querySelectorAll(".td-data")
+
+        let title = bookRow.getAttribute("data-title")
+        let author = bookRow.getAttribute("data-author")
+        let description = bookRow.getAttribute("data-description")
+        let count = bookRow.getAttribute("data-count")
+
+        data[0].innerHTML = bookId
+        data[1].innerHTML = title
+        data[2].innerHTML = author
+        data[3].innerHTML = description
+        data[4].innerHTML = count
+
+        let actionbtn = "<button id='" + buttonEditId + "' onclick='showEditRow(" + bookId + ")'>Edit</button>" +
+            "<button id='" + buttonDeleteId + "' onclick='deleteRow(" + bookId + ")'>Delete</button>"
+        data[5].innerHTML = actionbtn
+    }
+
+    function updateBook(bookId) {
+        let bookRow = document.getElementById(bookId)
+        let data = bookRow.querySelectorAll(".td-data")
+        let title = data[1].querySelector("#title").value
+        let author = data[2].querySelector("#author").value
+        let description = data[3].querySelector("#description").value
+        let count = data[4].querySelector("#count").value
+
+        const bookObject = {
+            "id": bookId,
+            "title": title,
+            "author": author,
+            "description": description,
+            "count": count,
+        }
+        updateDataToLocalStorage(bookObject)
+        bindData()
+    }
+
+    function deleteRow(bookId) {
+        deleteDataFromLocalStorage(bookId)
+        bindData()
+    }
+</script>
